@@ -132,20 +132,8 @@ display(results_final_df)
 
 # COMMAND ----------
 
-spark.conf.set("spark.databricks.optimizer.dynamicPartitionPruning.enabled", "true")
-
-from delta.tables import DeltaTable
-
-if spark._jsparkSession.catalog().tableExists("f1_processed.results"):
-    deltaTable = DeltaTable.forPath(spark, f"/mnt/formula1dljjcc/processed/results")
-    deltaTable.alias("tgt").merge(
-        results_final_df.alias("src"),
-        "tgt.race_id = src.race_id AND tgt.race_id = src.race_id"
-    ).whenMatchedUpdateAll().whenNotMatchedInsertAll().execute()
-else:
-    results_final_df.write.mode("overwrite").partitionBy("race_id").format(
-        "delta"
-    ).saveAsTable("f1_processed.results")
+merge_condition = "tgt.race_id = src.race_id AND tgt.race_id = src.race_id"
+merge_delta_data(results_final_df, "f1_processed", "results", processed_folder_path, merge_condition, "race_id")
 
 # COMMAND ----------
 

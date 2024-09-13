@@ -31,6 +31,6 @@ This setup ensures data is handled efficiently, supports incremental data loadin
 
 ---
 ## Visualizations
-![imagen](https://github.com/user-attachments/assets/580c8ac5-5be1-44a2-ab3f-108d15d379c2)
+![imagen](https://github.com/user-attachments/assets/3498fc14-840a-4873-b053-a4143cdcfa01)
 
 ![imagen](https://github.com/user-attachments/assets/0f4cd228-1e10-4daa-8b0f-2d842e228ff7)

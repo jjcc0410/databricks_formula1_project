@@ -27,7 +27,7 @@ ORDER BY
 -- COMMAND ----------
 
 SELECT 
-  race_year,
+  CAST(CONCAT(CAST(race_year AS STRING), '-01-01') AS DATE) AS race_year_date,
   driver_name,
   COUNT(1) AS total_races,
   SUM(calculated_points) AS total_points,
@@ -39,7 +39,3 @@ GROUP BY
   race_year, driver_name
 ORDER BY
   race_year, avg_points DESC
-
--- COMMAND ----------
-
-

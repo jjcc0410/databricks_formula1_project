@@ -12,7 +12,9 @@ This project leverages Databricks to analyze Formula 1 data. A dedicated Databri
 
 2. **Processed Data**: Stores data that has been cleaned and transformed for analysis. Located in the `trans` folder.
 
-3. **Presentation Data**: Holds the final data and visualizations needed for reporting and insights. Located in the `trans/analysis` folder.
+3. **Presentation Data**: Holds the final data and visualizations needed for reporting and insights. Located in the trans/analysis folder.
+
+   Within the `trans/analysis` folder, there are two notebooks specifically designed to identify dominant drivers and dominant teams across a timeline. Additionally, there are two other notebooks dedicated to visualizing these findings, providing insights through dynamic and informative graphics.
 
 ### Data Pipeline Workflow
 
@@ -26,3 +28,8 @@ This setup ensures data is handled efficiently, supports incremental data loadin
 
 ## Architecture
 ![imagen](https://github.com/user-attachments/assets/d1603f0f-8edf-4994-b7c4-3ba6dfb7384c)
+<br/><br/><br/>
+## Visualizations
+![imagen](https://github.com/user-attachments/assets/580c8ac5-5be1-44a2-ab3f-108d15d379c2)
+<br/><br/><br/>
+![imagen](https://github.com/user-attachments/assets/0f4cd228-1e10-4daa-8b0f-2d842e228ff7)

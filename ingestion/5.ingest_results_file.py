@@ -104,6 +104,15 @@ display(results_final_df)
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC De-dupe the dataframe
+
+# COMMAND ----------
+
+results_deduped_df = results_final_df.dropDuplicates(['race_id', 'driver_id'])
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## Step 4 - Write the output to processed container in parquet format
 
 # COMMAND ----------
@@ -132,8 +141,8 @@ display(results_final_df)
 
 # COMMAND ----------
 
-merge_condition = "tgt.race_id = src.race_id AND tgt.race_id = src.race_id"
-merge_delta_data(results_final_df, "f1_processed", "results", processed_folder_path, merge_condition, "race_id")
+merge_condition = "tgt.result_id = src.result_id AND tgt.race_id = src.race_id"
+merge_delta_data(results_deduped_df, "f1_processed", "results", processed_folder_path, merge_condition, "race_id")
 
 # COMMAND ----------
 

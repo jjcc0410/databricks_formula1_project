@@ -98,11 +98,7 @@ races_selected_df = races_with_timestamp_df.select(
 
 # COMMAND ----------
 
-races_selected_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.races")
-
-# COMMAND ----------
-
-display(spark.read.parquet(f'{processed_folder_path}/races'))
+races_selected_df.write.mode("overwrite").format("delta").saveAsTable("f1_processed.races")
 
 # COMMAND ----------
 

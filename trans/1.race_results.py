@@ -18,7 +18,7 @@ v_file_date = dbutils.widgets.get('p_file_date')
 # COMMAND ----------
 
 drivers_df = (
-    spark.read.parquet(f"{processed_folder_path}/drivers")
+    spark.read.format("delta").load(f"{processed_folder_path}/drivers")
     .withColumnRenamed("number", "driver_number")
     .withColumnRenamed("name", "driver_name")
     .withColumnRenamed("nationality", "driver_nationality")
@@ -27,21 +27,21 @@ drivers_df = (
 # COMMAND ----------
 
 constructors_df = (
-    spark.read.parquet(f"{processed_folder_path}/constructors")
+    spark.read.format("delta").load(f"{processed_folder_path}/constructors")
     .withColumnRenamed("constructorId", "constructor_id")
     .withColumnRenamed("name", "team")
 )
 
 # COMMAND ----------
 
-circuits_df = spark.read.parquet(f"{processed_folder_path}/circuits").withColumnRenamed(
+circuits_df = spark.read.format("delta").load(f"{processed_folder_path}/circuits").withColumnRenamed(
     "location", "circuit_location"
 )
 
 # COMMAND ----------
 
 races_df = (
-    spark.read.parquet(f"{processed_folder_path}/races")
+    spark.read.format("delta").load(f"{processed_folder_path}/races")
     .withColumnRenamed("name", "race_name")
     .withColumnRenamed("race_timestamp", "race_date")
 )
@@ -49,7 +49,7 @@ races_df = (
 # COMMAND ----------
 
 results_df = (
-    spark.read.parquet(f"{processed_folder_path}/results")
+    spark.read.format("delta").load(f"{processed_folder_path}/results")
     .filter(f"file_date = '{v_file_date}'")
     .withColumnRenamed("time", "race_time")
     .withColumnRenamed("race_id", "result_race_id")
@@ -117,9 +117,17 @@ final_df = (
 # COMMAND ----------
 
 
-overwrite_partition(final_df, "f1_presentation", "race_results", "race_id")
+# overwrite_partition(final_df, "f1_presentation", "race_results", "race_id")
+
+# COMMAND ----------
+
+merge_condition = "tgt.driver_name = src.driver_name AND tgt.race_id = src.race_id"
+merge_delta_data(final_df, "f1_presentation", "race_results", presentation_folder_path, merge_condition, "race_id")
 
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT * FROM f1_presentation.race_results
+# MAGIC SELECT race_id, COUNT(*) 
+# MAGIC FROM f1_presentation.race_results
+# MAGIC GROUP BY race_id
+# MAGIC ORDER BY race_id DESC;

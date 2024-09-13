@@ -151,7 +151,8 @@ dbutils.notebook.exit('Success')
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT race_id, COUNT(1)
+# MAGIC SELECT race_id, driver_id, COUNT(1)
 # MAGIC FROM f1_processed.results
-# MAGIC GROUP BY race_id
+# MAGIC GROUP BY race_id, driver_id
+# MAGIC HAVING COUNT(1) > 1
 # MAGIC ORDER BY race_id DESC;

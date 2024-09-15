@@ -27,8 +27,7 @@ This setup ensures data is handled efficiently, supports incremental data loadin
 ---
 
 ## Architecture
-![imagen](https://github.com/user-attachments/assets/d1603f0f-8edf-4994-b7c4-3ba6dfb7384c)
-
+![imagen](https://github.com/user-attachments/assets/5e864efd-5092-4cbf-8bd3-bf253e229c70)
 ---
 ## Visualizations
 ![imagen](https://github.com/user-attachments/assets/3498fc14-840a-4873-b053-a4143cdcfa01)
